@@ -42,7 +42,7 @@ public class Client {
             System.out.println("Digite o segundo valor: ");
             value2 = Double.parseDouble(read.nextLine());
 
-            MsqReq request = new MsqReq(oper, value1, value2);
+            MsqReq request = new MsqReq(oper, value1, value2, 0);
             out.writeObject(request);
 
             MsqResp response = (MsqResp) in.readObject();

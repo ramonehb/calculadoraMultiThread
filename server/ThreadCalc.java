@@ -25,12 +25,12 @@ public class ThreadCalc extends Thread {
             out = new ObjectOutputStream(client.getOutputStream());
             MsqReq request = (MsqReq) in.readObject();
 
-            System.out.println("Recebido: " + request.getValue1() + " " + request.getOperador() + " " + request.getValue2());
+            System.out.println("Recebido: " + request.getValue1() + " " + request.getOperador() + " " + request.getValue2() + " = " +request.getResult());
 
             char oper = request.getOperador();
             double value1 = request.getValue1();
             double value2 = request.getValue2();
-            double resp;
+            double resp = 0.0;
 
             switch (oper) {
                 case '+':
@@ -58,7 +58,8 @@ public class ThreadCalc extends Thread {
                     response = new MsqResp(Status.OPERADOR_INVALIDO, 0);
                     break;
             }
-
+            request.setResult(resp);
+            System.out.println(request.getValue1() + " " + request.getOperador() + " " + request.getValue2() + " = " + request.getResult());
             out.writeObject(response);
 
         } catch (Exception ex) {
